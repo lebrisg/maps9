@@ -82,6 +82,7 @@
 
  	  // load data lane 1
           $.getJSON("lane1.geojson",function(data){
+            console.log("Success");
             L.geoJson(data, { "color": "#00FF78" }).addTo(map);
           }); 
 
