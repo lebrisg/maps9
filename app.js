@@ -22,6 +22,7 @@ app.engine('html', ejs.renderFile);
 
 // Define public directory
 //app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/files'));
 
 // Display requests at the console
 app.use(morgan("combined"));
