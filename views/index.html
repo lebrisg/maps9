@@ -87,21 +87,21 @@
           }); 
 
  	  // load data lane 2
-          $.getJSON("lane2.geojson",function(data){
-            L.geoJson(data, { "color": "#FF00FF" }).addTo(map);
-          }); 
+          //$.getJSON("lane2.geojson",function(data){
+          //  L.geoJson(data, { "color": "#FF00FF" }).addTo(map);
+          //}); 
 
 	  // load GeoJSON from an external file
-	  $.getJSON("poi.geojson",function(data){
+	  //$.getJSON("poi.geojson",function(data){
 	    // add GeoJSON layer to the map once the file is loaded
-	    L.geoJson(data,{
-	      pointToLayer: function(feature,latlng){
-	        var marker = L.marker(latlng);
-	        marker.bindPopup(feature.properties.Nom + '<br/>' + feature.properties.Lieu + '<br/>' + feature.properties.Date);
-	        return marker;
-	      }
-	     }).addTo(map);
-	  });
+	    //L.geoJson(data,{
+	      //pointToLayer: function(feature,latlng){
+	        //var marker = L.marker(latlng);
+	        //marker.bindPopup(feature.properties.Nom + '<br/>' + feature.properties.Lieu + '<br/>' + feature.properties.Date);
+	        //return marker;
+	      //}
+	     //}).addTo(map);
+	  //});
 	  var popup = L.popup();
           map.on('click', function(e) {
             popup
