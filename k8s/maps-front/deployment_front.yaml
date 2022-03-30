@@ -36,7 +36,7 @@ spec:
             secretKeyRef:
               key: database-name
               name: mongodb 
-        image: image-registry.openshift-image-registry.svc:5000/maps7/maps-front:latest
+        image: image-registry.openshift-image-registry.svc:5000/maps9/maps-front:latest
         imagePullPolicy: Always
         name: maps-front
         ports:

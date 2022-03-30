@@ -1,5 +1,5 @@
 {
-  "name": "maps7",
+  "name": "maps9",
   "version": "1.0.0",
   "description": "Maps display",
   "main": "app.js",
@@ -24,12 +24,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/lebrisg/maps7.git"
+    "url": "http://github.com/lebrisg/maps9.git"
   },
   "author": "",
   "license": "CC-BY-1.0",
   "bugs": {
-    "url": "http://github.com/lebrisg/maps7/issues"
+    "url": "http://github.com/lebrisg/maps9/issues"
   },
-  "homepage": "http://github.com/lebrisg/maps7"
+  "homepage": "http://github.com/lebrisg/maps9"
 }

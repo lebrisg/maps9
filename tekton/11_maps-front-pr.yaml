@@ -10,9 +10,9 @@ spec:
   - name: deployment-name
     value: maps-front
   - name: git-url
-    value: https://github.com/lebrisg/maps7.git
+    value: https://github.com/lebrisg/maps9.git
   - name: IMAGE
-    value: image-registry.openshift-image-registry.svc:5000/maps7/maps-front 
+    value: image-registry.openshift-image-registry.svc:5000/maps9/maps-front 
   workspaces:
   - name: shared-workspace
     volumeClaimTemplate:
