@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: maps-front-pr
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: maps-front-pipeline
+  params:
+  - name: deployment-name
+    value: maps-front
+  - name: git-url
+    value: https://github.com/lebrisg/maps7.git
+  - name: IMAGE
+    value: image-registry.openshift-image-registry.svc:5000/maps7/maps-front 
+  workspaces:
+  - name: shared-workspace
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 500Mi
+  - name: sonar-settings
+    emptyDir: {}

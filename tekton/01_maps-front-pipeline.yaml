@@ -1,0 +1,124 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: maps-front-pipeline
+spec:
+  params:
+  - name: deployment-name
+    type: string
+    description: name of the deployment to be patched
+  - name: git-url
+    type: string
+    description: url of the git repo for the code of deployment
+  - name: git-revision
+    type: string
+    description: revision to be used from repo of the code for deployment
+    default: "main"
+  - name: IMAGE
+    type: string
+    description: Location of the repo where image has to be pushed
+  workspaces:
+  - name: shared-workspace
+  - name: sonar-settings
+  tasks:
+  - name: fetch-repository
+    taskRef:
+      name: git-clone
+      kind: ClusterTask
+    workspaces:
+    - name: output
+      workspace: shared-workspace
+    params:
+    - name: url
+      value: $(params.git-url) 
+    - name: subdirectory
+      value: ""
+    - name: deleteExisting
+      value: "true"
+    - name: revision
+      value: $(params.git-revision)
+  - name: npm-audit
+    taskRef:
+      name: npm-audit
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - fetch-repository  
+  - name: code-analysis
+    taskRef:
+      name: sonarqube-scanner
+    params:
+    - name: SONAR_HOST_URL
+      value: https://sonarqube-maps.apps.ocp4.asducode.fr
+    - name: SONAR_PROJECT_KEY
+      value: maps
+    workspaces:
+    - name: source-dir
+      workspace: shared-workspace
+    - name: sonar-settings
+      workspace: sonar-settings
+    runAfter:
+    - npm-audit 
+  - name: kube-linter
+    taskRef:
+      name: kube-linter
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    params:
+    - name: manifest
+      value: "k8s/maps-front"
+    - name: default_option
+      value: do-not-auto-add-defaults 
+    - name: includelist
+      # value: "no-extensions-v1beta,default-service-account,no-readiness-probe"
+      value: "no-extensions-v1beta"
+    - name: output_format
+      value: sarif
+    runAfter:
+    - fetch-repository 
+  - name: s2i
+    taskRef:
+      name: s2i-nodejs
+      kind: ClusterTask
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    params:
+    - name: IMAGE
+      value: $(params.IMAGE)
+    runAfter:
+    - kube-linter 
+  - name: scan-image
+    taskRef:
+      name: scan-image
+    workspaces:
+    - name: source-dir
+      workspace: shared-workspace
+    params:
+    - name: IMAGE
+      value: $(params.IMAGE) 
+    runAfter:
+    - s2i
+  - name: apply-manifests
+    taskRef:
+      name: apply-manifests
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    params:
+    - name: manifest_dir
+      value: "k8s/$(params.deployment-name)"
+    runAfter:
+    - s2i
+  - name: update-deployment
+    taskRef:
+      name: update-deployment
+    params:
+    - name: deployment
+      value: $(params.deployment-name)
+    - name: IMAGE
+      value: $(params.IMAGE)
+    runAfter:
+    - apply-manifests

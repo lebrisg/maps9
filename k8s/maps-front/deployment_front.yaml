@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: maps-front
+  name: maps-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maps-front
+  template:
+    metadata:
+      labels:
+        app: maps-front
+    spec:
+      containers:
+      - env:
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              key: database-user
+              name: mongodb
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-password
+              name: mongodb
+        - name: MONGODB_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: database-admin-password
+              name: mongodb
+        - name: MONGODB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: database-name
+              name: mongodb 
+        image: image-registry.openshift-image-registry.svc:5000/maps7/maps-front:latest
+        imagePullPolicy: Always
+        name: maps-front
+        ports:
+        - containerPort: 8080
+          protocol: TCP
