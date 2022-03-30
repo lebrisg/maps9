@@ -81,16 +81,15 @@
           }).addTo(map);
 
 
-          console.log("Before lane1");
-
  	  // load data lane 1
           $.getJSON("lane1.geojson",function(data){
-            console.log("Success");
+            L.geoJson(data, { "color": "#00FF78" }).addTo(map);
+          }); 
+
+          $.getJSON("LightGreen.geojson",function(data){
             L.geoJson(data, { "color": "#00FF78" }).addTo(map);
           }); 
           
-          console.log("After lane1");
-
  	  // load data lane 2
           //$.getJSON("lane2.geojson",function(data){
           //  L.geoJson(data, { "color": "#FF00FF" }).addTo(map);
