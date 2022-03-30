@@ -57,15 +57,16 @@
           //}
           //run().catch(console.dir);
 
-	  var map = L.map('map').setView([40.90714, 0.822596], 15);
+	  var map = L.map('map').setView([13.707784, 100.518723], 15);
 	  var markerLayerGroup = L.layerGroup().addTo(map);
+	  //L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 	  }).addTo(map);
 	  L.easyButton('<strong>B</strong>', function(btn, map){
-            var barcelone = [41.403572, 2.174408];
-            map.setView(barcelone, 14);
+            var bangkok = [13.707784, 100.518723];
+            map.setView(bangkok, 14);
           }).addTo(map);
 	  L.easyButton('<strong>V</strong>', function(btn, map){
             var villa = [40.90714, 0.822596];
