@@ -92,6 +92,10 @@
             L.geoJson(data, { "color": "#00FF78" }).addTo(map);
           }); 
            };
+          else
+           {
+            map.removeLayer("LightGreen.geojson");
+           };
           
  	  // load data lane 2
           //$.getJSON("lane2.geojson",function(data){
