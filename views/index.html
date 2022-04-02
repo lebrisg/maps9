@@ -78,6 +78,7 @@
           }).addTo(map);
 	  L.easyButton('<strong>P</strong>', function(btn, map){
             district_enabled = 1 - district_enabled;
+            map.invalidateSize(true);
           }).addTo(map);
 
  	  // load data lane 1
