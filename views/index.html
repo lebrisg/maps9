@@ -82,16 +82,16 @@
           }).addTo(map);
 
  	  // load data lane 1
-          if(district_enabled == 1)
-           {
           $.getJSON("lane1.geojson",function(data){
             L.geoJson(data, { "color": "#00FF78" }).addTo(map);
           }); 
-           };
 
+          if(district_enabled == 1)
+           {
           $.getJSON("LightGreen.geojson",function(data){
             L.geoJson(data, { "color": "#00FF78" }).addTo(map);
           }); 
+           };
           
  	  // load data lane 2
           //$.getJSON("lane2.geojson",function(data){
