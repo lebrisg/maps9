@@ -57,6 +57,7 @@
           //}
           //run().catch(console.dir);
 
+	  var district_enabled = 0;
 	  var map = L.map('map').setView([13.752558, 100.49336], 15);
 	  var markerLayerGroup = L.layerGroup().addTo(map);
 	  L.tileLayer('http://{s}.tile.osm-tools.org/osm/{z}/{x}/{y}.png', {
@@ -76,15 +77,16 @@
             map.setView(ebre, 14);
           }).addTo(map);
 	  L.easyButton('<strong>P</strong>', function(btn, map){
-            var perpignan = [42.65974, 2.88493];
-            map.setView(perpignan, 17);
+            district_enabled = 1 - district_enabled;
           }).addTo(map);
 
-
  	  // load data lane 1
+          if(district_enabled == 1)
+           {
           $.getJSON("lane1.geojson",function(data){
             L.geoJson(data, { "color": "#00FF78" }).addTo(map);
           }); 
+           };
 
           $.getJSON("LightGreen.geojson",function(data){
             L.geoJson(data, { "color": "#00FF78" }).addTo(map);
