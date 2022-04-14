@@ -3,4 +3,4 @@
 # replace project name in files if needed
 
 oc new-project maps9
-oc apply -f tekton
+oc apply -f ../tekton
