@@ -24,11 +24,11 @@ spec:
     - -c
     args:
     - npm install
-  - name: npm-audit
-    image: image-registry.openshift-image-registry.svc:5000/openshift/nodejs
-    workingDir: /workspace/source
-    command:
-    - /bin/sh
-    - -c
-    args:
-    - npm audit
+#  - name: npm-audit
+#    image: image-registry.openshift-image-registry.svc:5000/openshift/nodejs
+#    workingDir: /workspace/source
+#    command:
+#    - /bin/sh
+#    - -c
+#    args:
+#    - npm audit

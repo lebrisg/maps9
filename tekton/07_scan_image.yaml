@@ -20,10 +20,10 @@ spec:
       wget -O /tekton/home/.cache/trivy/db/trivy-offline.db.tgz https://github.com/aquasecurity/trivy-db/releases/latest/download/trivy-offline.db.tgz --no-check-certificate
       cd /tekton/home/.cache/trivy/db
       tar xvf trivy-offline.db.tgz
-  - name: scan-image
-    image: aquasec/trivy 
-    workingDir: $(workspaces.source-dir.path)
-    script: |
-      trivy image --clear-cache 
-      trivy image --skip-update --severity='HIGH,CRITICAL' --vuln-type='os,library' --format='table' $(inputs.params.IMAGE) > /tekton/home/cve-report.txt
-      cat /tekton/home/cve-report.txt
+#  - name: scan-image
+#    image: aquasec/trivy 
+#    workingDir: $(workspaces.source-dir.path)
+#    script: |
+#      trivy image --clear-cache 
+#      trivy image --skip-update --severity='HIGH,CRITICAL' --vuln-type='os,library' --format='table' $(inputs.params.IMAGE) > /tekton/home/cve-report.txt
+#      cat /tekton/home/cve-report.txt
