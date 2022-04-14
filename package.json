@@ -4,6 +4,7 @@
   "description": "Maps display",
   "main": "app.js",
   "dependencies": {
+    "async": "^3.2.3",
     "chai": "^3.5.0",
     "chai-http": "^4.3.0",
     "mocha": "^9.1.1",
